@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title QR Code Generator
+  body
+    header
+      h1 QR Code Generator
+    main
+      section
+        h2 Documentation
+        p This is where you can add the documentation for your QR-code generator.
+      section
+        h2 Create a QR-code
+        form(action="/generate-qr" method="POST")
+          label(for="data") Enter data for QR code:
+          input#data(type="text" name="data")
+          button(type="submit") Generate QR code
+      section
+        h2 Archive of QR-codes
+        p This is where you can display an archive of generated QR-codes.

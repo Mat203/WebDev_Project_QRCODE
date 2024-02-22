@@ -1,0 +1,30 @@
+header(style="padding: 10px; background-color: #f8f9fa;")
+
+    h1(style="font-size: 24px; color: #555;") User profile
+    h3(style="font-size: 18px; color: #555;")  ID: #{user._id}
+    h3(style="font-size: 18px; color: #555;") name: #{user.firstName}
+    h3(style="font-size: 18px; color: #555;") lastname: #{user.lastName}
+    h3(style="font-size: 18px; color: #555;")  email: #{user.email}
+    h3(style="font-size: 18px; color: #555;")  pass: #{user.password}
+    h3(style="font-size: 18px; color: #555;")  isAdmin: #{user.isAdmin}
+
+    button(id="deleteStudent", style="padding: 8px; background-color: #dc3545; color: #fff; border: none; cursor: pointer; margin-top: 10px; margin-right: 10px;") Delete user
+    button(id="updateStudent", style="padding: 8px; background-color: #28a745; color: #fff; border: none; cursor: pointer; margin-top: 10px;") Update user
+
+section(style="margin-top: 20px;")
+
+hl(style="margin-top: 20px;")
+a(href="/", style="text-decoration: none; color: #007bff; margin-right: 10px") Home page
+a(href="/users", style="text-decoration: none; color: #007bff;") Users list
+
+div(id="resultContainer", style="margin-top: 20px;")
+
+script.
+    document.getElementById('deleteStudent').addEventListener('click', function () {
+        fetch(`/users/#{user._id}`, {method: 'DELETE'})
+        .then(() => {alert('User was deleted');window.location.href = '/users';})
+        .catch(error => {console.error('There has been a problem with your fetch operation:', error)});
+    });
+    document.getElementById('updateStudent').addEventListener('click', function () {
+        window.location.href = `/users/#{user._id}/update?_method=DELETE`;
+    });

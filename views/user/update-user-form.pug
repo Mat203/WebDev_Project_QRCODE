@@ -1,0 +1,61 @@
+h1(style="font-size: 24px; color: #333;") User update
+
+form(action=`/users/${user._id}?_method=PATCH`, method="POST", id="updateUserForm", style="margin-top: 20px;")
+
+    label(for="firstName", style="display: block; margin-bottom: 5px;") first name:
+    input(type="text", value=user.firstName id="firstName", name="firstName", style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;")
+
+    label(for="lastName", style="display: block; margin-bottom: 5px;") lastname:
+    input(type="text", id="lastName", value=user.lastName  name="lastName", style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;")
+
+    label(for="email", style="display: block; margin-bottom: 5px;") email:
+    input(type="email", id="email", value=user.email name="email", style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;")
+
+    label(for="password", style="display: block; margin-bottom: 5px;") password:
+    input(type="password", id="password", value=user.password name="password", style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;")
+
+    label(for="isAdmin", style="display: block; margin-bottom: 5px;") role:
+    select(id="isAdmin", name="isAdmin", style="width: 100%; padding: 8px; margin-bottom: 10px; box-sizing: border-box;")
+        option(value='false', selected=user.isAdmin === false) User
+        option(value='true', selected=user.isAdmin === true) Admin
+
+    input(type="submit", value="Submit", style="background-color: #28a745; color: #fff; padding: 10px; border: none; cursor: pointer;")
+
+hl(style="margin-top: 20px;")
+a(href="/", style="text-decoration: none; color: #007bff; margin-right: 10px") Home page
+a(href="/users", style="text-decoration: none; color: #007bff;") Users list
+
+script.
+    window.onload = function() {
+        const originalData = {
+            firstName: document.getElementById('firstName').value,
+            lastName: document.getElementById('lastName').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+            isAdmin: document.getElementById('isAdmin').value
+        };
+
+        document.getElementById('updateUserForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const currentData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                isAdmin: document.getElementById('isAdmin').value
+            };
+
+            const allFieldsModified = Object.keys(originalData).every(key => originalData[key] !== currentData[key]);
+            const anyFieldModified = Object.keys(originalData).some(key => originalData[key] !== currentData[key]);
+
+            if (allFieldsModified) {
+                this.action = `/users/#{user._id}?_method=PUT`;
+            } else if (anyFieldModified) {
+                this.action = `/users/#{user._id}?_method=PATCH`;
+            } else {
+                this.action = `/users/#{user._id}`;
+            }
+            this.submit();
+        });
+    };

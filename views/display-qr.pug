@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    title Display QR Code
+  body
+    header
+      h1 Your QR Code
+    main
+      section
+        h2 QR Code
+        img(src=qrCode.image alt="Your QR Code")
+        h2 Details
+        p Name: #{qrCode.name}
+        p Link: #{qrCode.link}
+        p Important: #{qrCode.important ? 'Yes' : 'No'}
