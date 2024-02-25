@@ -12,9 +12,13 @@ html
       section
         h2 Create a QR-code
         form(action="/generate-qr" method="POST")
+          label(for="name") Enter name for QR code:
+          input#name(type="text" name="name")
           label(for="data") Enter data for QR code:
           input#data(type="text" name="data")
+          label(for="important") Mark as important:
+          input#important(type="checkbox" name="important")
           button(type="submit") Generate QR code
       section
         h2 Archive of QR-codes
-        p This is where you can display an archive of generated QR-codes.
+        button(onclick="location.href='/qrcodes'") View QR Code Archive

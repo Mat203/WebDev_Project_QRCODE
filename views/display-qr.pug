@@ -2,6 +2,12 @@ doctype html
 html
   head
     title Display QR Code
+    script.
+      function deleteQRCode() {
+        fetch('/delete-qr/' + '#{qrCode._id}', { method: 'DELETE' })
+          .then(res => window.location.href = '/')
+          .catch(err => console.error(err));
+      }
   body
     header
       h1 Your QR Code
@@ -13,3 +19,6 @@ html
         p Name: #{qrCode.name}
         p Link: #{qrCode.link}
         p Important: #{qrCode.important ? 'Yes' : 'No'}
+        button(onclick=`location.href='/update-qr/' + '${qrCode._id}'`) Update QR Code
+        button(onclick="deleteQRCode()") Delete QR Code
+        button(onclick="location.href='/'") Return to Main Menu

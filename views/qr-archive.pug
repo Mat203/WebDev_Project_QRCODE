@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title QR Code Archive
+  body
+    header
+      h1 QR Code Archive
+    main
+      section
+        h2 Archive of QR-codes
+        each qrCode in qrcodes
+          div
+            h3= qrCode.name
+            img(src=qrCode.image alt=qrCode.name)
+            p Link: #{qrCode.link}
+            p Important: #{qrCode.important ? 'Yes' : 'No'}
+            button(onclick=`location.href='/display-qr/' + '${qrCode._id}'`) Inspect QR Code
+
