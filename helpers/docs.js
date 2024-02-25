@@ -1,3 +1,5 @@
+// helpers/docs.js
+
 function getDocs(req, res) {
     const docs = {
         "GET /users": {

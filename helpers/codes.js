@@ -5,6 +5,13 @@ function saveQRCodeInDatabase(name, link, important) {
     return qrCode.save();
 }
 
+function deleteQRCode(id) {
+    fetch('/delete-qr/' + id, { method: 'DELETE' })
+        .then(res => window.location.href = '/')
+        .catch(err => console.error(err));
+}
+
 module.exports = {
-    saveQRCode: saveQRCodeInDatabase
+    saveQRCode: saveQRCodeInDatabase,
+    deleteQRCode: deleteQRCode
 };
