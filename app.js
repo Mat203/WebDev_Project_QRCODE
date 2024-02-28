@@ -2,14 +2,16 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const cors = require('cors');
+const corsOptions = require('./helpers/corsOptions');
 const cookieParser = require('cookie-parser');
 const port = require('./configs/appConfig');
 const mongoConnection = require('./connections/mongoConnection');
 const routes = require('./routes');
 
-
 const app = express();
-// app.use(cors(corsOptions));
+
+
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({ extended: false }));
